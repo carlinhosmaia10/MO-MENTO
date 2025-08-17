@@ -28,40 +28,30 @@
       z-index: 0;
     }
 
-    .top-text, .center-text {
+    .center-text {
       position: absolute;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
+      color: red;
+      font-size: 10vw;
       font-weight: bold;
-      text-shadow: 0 0 20px #ff69b4;
+      text-shadow: 0 0 15px #ff0000;
       z-index: 10;
+      animation: pulse 2s infinite;
       user-select: none;
       pointer-events: none;
-      animation: pulse 2s infinite;
-    }
-
-    .top-text {
-      top: 2%;
-      font-size: 10vw;
-      color: pink;
-    }
-
-    .center-text {
-      font-size: 18vw;
-      color: red;
-      text-shadow: 0 0 25px #ff0000;
     }
 
     @keyframes pulse {
-      0% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.05); }
-      100% { transform: translateX(-50%) scale(1); }
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
   </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
-  <div class="top-text">LINDA DO MEU CORAÇÃO</div>
   <div class="center-text">∞</div>
 
   <script>
@@ -74,42 +64,26 @@
     const particles = [];
     const depthRange = 50;
 
-    // Obter altura do texto para posicionar o coração abaixo
-    const topText = document.querySelector('.top-text');
-    const centerText = document.querySelector('.center-text');
-
-    function updatePositions() {
-      const topTextHeight = topText.offsetHeight;
-      const heartCenterY = topTextHeight + (h - topTextHeight) / 2;
-      centerText.style.top = `${heartCenterY}px`;
-
-      particles.forEach(p => {
-        p.ty = p.tyOriginal + heartCenterY - h / 2;
-      });
-    }
-
     // Calcular puntos del corazón
     for (let t = 0; t < Math.PI * 2; t += 0.02) {
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-      heartPoints.push({ x: x * 18, y: y * 18 });
+      heartPoints.push({ x: x * 12, y: y * 12 }); // escala ajustada para móviles
     }
 
-    // Criar partículas
-    for (let i = 0; i < 1200; i++) {
+    // Crear partículas
+    for (let i = 0; i < 1000; i++) {
       const p = heartPoints[i % heartPoints.length];
       const z = Math.random() * depthRange - depthRange / 2;
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
         z: z,
-        txOriginal: p.x,
-        tyOriginal: p.y,
         tx: p.x + w / 2,
         ty: p.y + h / 2,
         tz: z,
         color: `rgba(255, 0, 0, 0.85)`,
-        size: Math.random() * 1.5 + 0.8,
+        size: Math.random() * 1.2 + 0.6,
         speed: Math.random() * 0.015 + 0.004
       });
     }
@@ -130,7 +104,7 @@
         const rotatedX = dx * cosA - dz * sinA;
         const rotatedZ = dx * sinA + dz * cosA;
 
-        const scale = 300 / (300 + rotatedZ + 100);
+        const scale = 200 / (200 + rotatedZ + 100);
         const px = rotatedX + w / 2;
         const py = p.y;
         const size = p.size * scale;
@@ -149,16 +123,6 @@
     function resizeCanvas() {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
-
-      // Atualizar posições do coração
-      const topTextHeight = topText.offsetHeight;
-      const heartCenterY = topTextHeight + (h - topTextHeight) / 2;
-      centerText.style.top = `${heartCenterY}px`;
-
-      particles.forEach(p => {
-        p.tx = p.txOriginal + w / 2;
-        p.ty = p.tyOriginal + heartCenterY;
-      });
     }
 
     window.addEventListener("resize", resizeCanvas);
