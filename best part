@@ -18,6 +18,19 @@
       font-family: 'Arial', sans-serif;
     }
 
+    /* estrelas no fundo */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
     h1 {
       color: #ff3366;
       font-size: 3em;
@@ -25,7 +38,7 @@
       animation: pulse 2s infinite;
     }
 
-    /* animação do coração */
+    /* coração */
     .heart {
       position: relative;
       width: 200px;
@@ -42,6 +55,7 @@
       height: 200px;
       border-radius: 50%;
       background: #ff3366;
+      box-shadow: 0 0 25px #ff3366;
     }
 
     .heart::before {
@@ -54,6 +68,7 @@
       top: 0;
     }
 
+    /* animações */
     @keyframes beat {
       0%, 100% { transform: rotate(-45deg) scale(1); }
       50% { transform: rotate(-45deg) scale(1.1); }
@@ -63,41 +78,10 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.6; }
     }
-
-    /* estrelas de fundo */
-    .stars {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: transparent url("https://www.script-tutorials.com/demos/360/images/stars.png") repeat;
-      animation: moveStars 200s linear infinite;
-      z-index: -1;
-    }
-
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: -10000px 5000px; }
-    }
-
-    /* personagens nos cantos */
-    .bunny {
-      position: absolute;
-      bottom: 20px;
-      width: 100px;
-    }
-
-    .bunny.left { left: 20px; }
-    .bunny.right { right: 20px; }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-  <h1>Te amo</h1>
+  <h1>Te Amo</h1>
   <div class="heart"></div>
-
-  <!-- personagens fofinhos -->
-  <img class="bunny left" src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif" alt="Bunny Left">
-  <img class="bunny right" src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif" alt="Bunny Right">
-
 </body>
 </html>
