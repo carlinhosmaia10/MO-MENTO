@@ -1,10 +1,33 @@
-.love::before {
-  content: '❤';
-  font-family: Arial, sans-serif; /* fonte válida */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.5); /* centraliza e aumenta */
-  color: red; /* cor do coração */
-  font-size: 80px; /* tamanho ajustável */
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Te Amo ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+    }
+
+    .love::before {
+      content: '❤';
+      font-family: Arial, sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.5);
+      color: red;
+      font-size: 80px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Aqui o elemento que recebe o coração -->
+  <div class="love"></div>
+</body>
+</html>
